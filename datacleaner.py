@@ -52,7 +52,8 @@ colunas_para_excluir = [
     'DESCR_MARCA_VEICULO',
     'ANO_FABRICACAO',
     'ANO_MODELO',
-    'QUANT_CELULAR'
+    'QUANT_CELULAR',
+    'ANO_BO'
 ]
 
 # excluir colunas desnecessárias para análise
@@ -112,36 +113,66 @@ df_final = df_final.dropna(subset=['BAIRRO'])
 # Padronizar com True e False
 df_final['FLAGRANTE'] = df_final['FLAGRANTE'].replace({'Sim': True, 'Não': False})
 
-# preenche valores vazios com string vazia para padronizar com true or false
-df_final['VITIMAFATAL'] = df_final['VITIMAFATAL'].fillna('').astype(bool)
+# lista de colunas a serem transformadas em bool
+colunas = [
+    'VITIMAFATAL', 
+    'SEXO', 
+    'PLACA_VEICULO', 
+    'DESCR_COR_VEICULO', 
+    'DESCR_TIPO_VEICULO'
+]
 
-print(df_final['VITIMAFATAL'])
+# loop para transformar colunas em True ou False
+for coluna in colunas:
+    df_final[coluna] = df_final[coluna].fillna('').astype(bool)
+
+# Cria uma nova coluna contendo o País
+df_final['PAÍS'] = 'Brasil'
+
+# Cria uma coluna única com o endereço completo
+df_final['ENDEREÇO'] = df_final['LOGRADOURO'].astype(str) + ' - ' + df_final['NUMERO'].astype(str) + ' - ' + df_final['BAIRRO'].astype(str) + ' - ' + df_final['CIDADE'].astype(str) + ' - ' + df_final['UF'].astype(str) + ' - ' + df_final['PAÍS'].astype(str)
+
+# deleta as colunas anteriores desnecessárias
+df_final = df_final.drop(['LOGRADOURO', 'NUMERO', 'BAIRRO', 'CIDADE', 'UF', 'PAÍS' ], axis=1)
+
+# Demonstra os valores da coluna
+# print(df_final['DELEGACIA_NOME'].value_counts())
+
+# Cria valores para subistituição na coluna DELEGACIA_NOME
+mapeamento = {
+    'DELEGACIA ELETRONICA': 'DELEGACIA_VIRTUAL',
+    'DELEGACIA ELETRONICA 1': 'DELEGACIA_VIRTUAL'
+}
+
+# Subistitui valores de delegacia eletronica por delegacia virtual
+df_final['DELEGACIA_NOME'] = df_final['DELEGACIA_NOME'].replace(mapeamento)
+
+# Subistitui valores restantes por delegacia física
+df_final.loc[df_final['DELEGACIA_NOME'] != 'DELEGACIA_VIRTUAL', 'DELEGACIA_NOME'] = 'DELEGACIA_FÍSICA'
+
+# Padroniza a coluna de marca_celular
+df_final['MARCA_CELULAR'] = df_final['MARCA_CELULAR'].str.title()
 
 # print(df_final.info())
 # Index: 191850 entries, 0 to 241238
-# Data columns (total 19 columns):
+# Data columns (total 14 columns):
 #  #   Column                Non-Null Count   Dtype
 # ---  ------                --------------   -----
-#  0   ANO_BO                191850 non-null  int64
-#  1   BO_INICIADO           191850 non-null  datetime64[ns]
-#  2   FLAGRANTE             191850 non-null  object        
-#  3   LOGRADOURO            191850 non-null  object        
-#  4   NUMERO                191850 non-null  float64
-#  5   BAIRRO                191850 non-null  object
-#  6   CIDADE                191850 non-null  object
-#  7   UF                    191850 non-null  object
-#  8   LATITUDE              191850 non-null  float64
-#  9   LONGITUDE             191850 non-null  float64
-#  10  DESCRICAOLOCAL        191850 non-null  object
-#  11  DELEGACIA_NOME        191850 non-null  object
-#  12  VITIMAFATAL           599 non-null     object
-#  13  SEXO                  599 non-null     object
-#  14  PLACA_VEICULO         41400 non-null   object
-#  15  DESCR_COR_VEICULO     41373 non-null   object
-#  16  DESCR_TIPO_VEICULO    41362 non-null   object
-#  17  MARCA_CELULAR         191850 non-null  object
-#  18  DATA_HORA_OCORRENCIA  191850 non-null  datetime64[ns]
-# dtypes: datetime64[ns](2), float64(3), int64(1), object(13)
+#  0   BO_INICIADO           191850 non-null  datetime64[ns]
+#  1   FLAGRANTE             191850 non-null  bool
+#  2   LATITUDE              191850 non-null  float64       
+#  3   LONGITUDE             191850 non-null  float64
+#  4   DESCRICAOLOCAL        191850 non-null  object
+#  5   DELEGACIA_NOME        191850 non-null  object
+#  6   VITIMAFATAL           191850 non-null  bool
+#  7   SEXO                  191850 non-null  bool
+#  8   PLACA_VEICULO         191850 non-null  bool
+#  9   DESCR_COR_VEICULO     191850 non-null  bool
+#  10  DESCR_TIPO_VEICULO    191850 non-null  bool
+#  11  MARCA_CELULAR         191850 non-null  object
+#  12  DATA_HORA_OCORRENCIA  191850 non-null  datetime64[ns]
+#  13  ENDEREÇO              191850 non-null  object
+# dtypes: bool(6), datetime64[ns](2), float64(2), object(4)
 
 # salvar os arquivos tratados em csv
 # nome_do_arquivo = r"C:\dev\roubos_celular_sp\dataset\dados.csv"
