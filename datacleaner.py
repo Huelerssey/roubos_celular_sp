@@ -17,64 +17,132 @@ for arquivo in os.listdir(caminho_pasta):
 # Concatena os DataFrames em um único DataFrame
 df_final = pd.concat(dataframes, ignore_index=True)
 
+# lista de colunas a serem excluidas
+colunas_para_excluir = [
+    'NUM_BO',
+    'NUMERO_BOLETIM',
+    'BO_EMITIDO',
+    'PERIDOOCORRENCIA',
+    'DATACOMUNICACAO',
+    'DATAELABORACAO',
+    'BO_AUTORIA',
+    'NUMERO_BOLETIM_PRINCIPAL',
+    'EXAME',
+    'SOLUCAO',
+    'DELEGACIA_CIRCUNSCRICAO',
+    'ESPECIE',
+    'RUBRICA',
+    'DESDOBRAMENTO',
+    'STATUS',
+    'TIPOPESSOA',
+    'NATURALIDADE',
+    'NACIONALIDADE',
+    'DATANASCIMENTO',
+    'IDADE',
+    'ESTADOCIVIL',
+    'PROFISSAO',
+    'GRAUINSTRUCAO',
+    'CORCUTIS',
+    'NATUREZAVINCULADA',
+    'TIPOVINCULO',
+    'RELACIONAMENTO',
+    'PARENTESCO',
+    'UF_VEICULO',
+    'CIDADE_VEICULO',
+    'DESCR_MARCA_VEICULO',
+    'ANO_FABRICACAO',
+    'ANO_MODELO',
+    'QUANT_CELULAR'
+]
+
+# excluir colunas desnecessárias para análise
+df_final = df_final.drop(colunas_para_excluir, axis=1)
+
+# garante que a coluna será considerada como texto
+df_final['DATAOCORRENCIA'] = df_final['DATAOCORRENCIA'].astype(str)
+
+# remove espaços vazios da coluna
+df_final['DATAOCORRENCIA'] = df_final['DATAOCORRENCIA'].str.strip()
+
+# Recorta apenas a primeira parte que contem a data
+df_final['DATAOCORRENCIA'] = df_final['DATAOCORRENCIA'].str.split(" ").str[0]
+
+# exibe a quantidade de numeros não numericos na coluna
+# count_nan = df_final['HORAOCORRENCIA'].isna().sum()
+# print(f'O numero de valores não numericos na coluna HORAOCORRENCIA é: {count_nan}')
+
+# exclui todos os valores vazios da coluna
+df_final = df_final.dropna(subset=['HORAOCORRENCIA'])
+
+# transforma a coluna em texto
+df_final['HORAOCORRENCIA'] = df_final['HORAOCORRENCIA'].astype(str)
+
+# remove espaços vazios da coluna
+df_final['HORAOCORRENCIA'] = df_final['HORAOCORRENCIA'].str.strip()
+
+# concatena a data e a hora da ocorrencia
+df_final['DATA_HORA_OCORRENCIA'] = df_final['DATAOCORRENCIA'] + ' ' + df_final['HORAOCORRENCIA']
+
+# deleta as colunas anteriores desnecessárias
+df_final = df_final.drop(['DATAOCORRENCIA', 'HORAOCORRENCIA'], axis=1)
+
+# converte a coluna em formato datetime
+df_final['DATA_HORA_OCORRENCIA'] = pd.to_datetime(df_final['DATA_HORA_OCORRENCIA'], dayfirst=True, errors='coerce')
+
+# verifica a quantida de valores vazios da coluna
+# nan_count = df_final['DATA_HORA_OCORRENCIA'].isna().sum()
+# print(f"Quantidade de linhas com valor NaT: {nan_count}")
+
+# exclui todos os valores vazios da coluna
+df_final = df_final.dropna(subset=['DATA_HORA_OCORRENCIA'])
+
+# transforma o formato de data e hora no formato correto
+df_final['DATA_HORA_OCORRENCIA'] = df_final['DATA_HORA_OCORRENCIA'].dt.strftime('%d/%m/%Y %H:%M:%S')
+df_final['DATA_HORA_OCORRENCIA'] = pd.to_datetime(df_final['DATA_HORA_OCORRENCIA'], dayfirst=True, errors='coerce')
+
+# exclui todos os valores vazios da coluna
+df_final = df_final.dropna(subset=['LATITUDE', 'LONGITUDE'])
+
+# exclui todos os valores vazios da coluna
+df_final = df_final.dropna(subset=['MARCA_CELULAR'])
+
+# exclui todos os valores vazios da coluna
+df_final = df_final.dropna(subset=['BAIRRO'])
+
+# Padronizar com True e False
+df_final['FLAGRANTE'] = df_final['FLAGRANTE'].replace({'Sim': True, 'Não': False})
+
+# preenche valores vazios com string vazia para padronizar com true or false
+df_final['VITIMAFATAL'] = df_final['VITIMAFATAL'].fillna('').astype(bool)
+
+print(df_final['VITIMAFATAL'])
 
 # print(df_final.info())
-# RangeIndex: 241240 entries, 0 to 241239
-# Data columns (total 54 columns):
-#  #   Column                    Non-Null Count   Dtype         
-# ---  ------                    --------------   -----         
-#  0   ANO_BO                    241240 non-null  int64         
-#  1   NUM_BO                    241240 non-null  int64         
-#  2   NUMERO_BOLETIM            241240 non-null  object        
-#  3   BO_INICIADO               241240 non-null  datetime64[ns]
-#  4   BO_EMITIDO                241240 non-null  datetime64[ns]
-#  5   DATAOCORRENCIA            241240 non-null  object        
-#  6   HORAOCORRENCIA            222803 non-null  object        
-#  7   PERIDOOCORRENCIA          241240 non-null  object        
-#  8   DATACOMUNICACAO           241240 non-null  datetime64[ns]
-#  9   DATAELABORACAO            241240 non-null  datetime64[ns]
-#  10  BO_AUTORIA                241240 non-null  object        
-#  11  FLAGRANTE                 241240 non-null  object        
-#  12  NUMERO_BOLETIM_PRINCIPAL  52374 non-null   object        
-#  13  LOGRADOURO                228691 non-null  object        
-#  14  NUMERO                    240726 non-null  float64       
-#  15  BAIRRO                    237674 non-null  object        
-#  16  CIDADE                    240726 non-null  object        
-#  17  UF                        240726 non-null  object        
-#  18  LATITUDE                  211428 non-null  float64       
-#  19  LONGITUDE                 211428 non-null  float64       
-#  20  DESCRICAOLOCAL            241240 non-null  object        
-#  21  EXAME                     2158 non-null    object        
-#  22  SOLUCAO                   241240 non-null  object        
-#  23  DELEGACIA_NOME            241240 non-null  object        
-#  24  DELEGACIA_CIRCUNSCRICAO   241240 non-null  object        
-#  25  ESPECIE                   241240 non-null  object        
-#  26  RUBRICA                   241240 non-null  object        
-#  27  DESDOBRAMENTO             2603 non-null    object        
-#  28  STATUS                    241240 non-null  object        
-#  29  TIPOPESSOA                696 non-null     object        
-#  30  VITIMAFATAL               696 non-null     object        
-#  31  NATURALIDADE              73 non-null      object        
-#  32  NACIONALIDADE             82 non-null      object        
-#  33  SEXO                      696 non-null     object        
-#  34  DATANASCIMENTO            634 non-null     datetime64[ns]
-#  35  IDADE                     634 non-null     float64       
-#  36  ESTADOCIVIL               399 non-null     object        
-#  37  PROFISSAO                 308 non-null     object        
-#  38  GRAUINSTRUCAO             237 non-null     object        
-#  39  CORCUTIS                  25 non-null      object        
-#  40  NATUREZAVINCULADA         696 non-null     object        
-#  41  TIPOVINCULO               696 non-null     object        
-#  42  RELACIONAMENTO            0 non-null       float64       
-#  43  PARENTESCO                0 non-null       float64       
-#  44  PLACA_VEICULO             48826 non-null   object        
-#  45  UF_VEICULO                48700 non-null   object        
-#  46  CIDADE_VEICULO            48696 non-null   object        
-#  47  DESCR_COR_VEICULO         48776 non-null   object        
-#  48  DESCR_MARCA_VEICULO       48833 non-null   object        
-#  49  ANO_FABRICACAO            240135 non-null  float64       
-#  50  ANO_MODELO                234967 non-null  float64       
-#  51  DESCR_TIPO_VEICULO        48787 non-null   object        
-#  52  QUANT_CELULAR             189058 non-null  float64       
-#  53  MARCA_CELULAR             239617 non-null  object        
-# dtypes: datetime64[ns](5), float64(9), int64(2), object(38)
+# Index: 191850 entries, 0 to 241238
+# Data columns (total 19 columns):
+#  #   Column                Non-Null Count   Dtype
+# ---  ------                --------------   -----
+#  0   ANO_BO                191850 non-null  int64
+#  1   BO_INICIADO           191850 non-null  datetime64[ns]
+#  2   FLAGRANTE             191850 non-null  object        
+#  3   LOGRADOURO            191850 non-null  object        
+#  4   NUMERO                191850 non-null  float64
+#  5   BAIRRO                191850 non-null  object
+#  6   CIDADE                191850 non-null  object
+#  7   UF                    191850 non-null  object
+#  8   LATITUDE              191850 non-null  float64
+#  9   LONGITUDE             191850 non-null  float64
+#  10  DESCRICAOLOCAL        191850 non-null  object
+#  11  DELEGACIA_NOME        191850 non-null  object
+#  12  VITIMAFATAL           599 non-null     object
+#  13  SEXO                  599 non-null     object
+#  14  PLACA_VEICULO         41400 non-null   object
+#  15  DESCR_COR_VEICULO     41373 non-null   object
+#  16  DESCR_TIPO_VEICULO    41362 non-null   object
+#  17  MARCA_CELULAR         191850 non-null  object
+#  18  DATA_HORA_OCORRENCIA  191850 non-null  datetime64[ns]
+# dtypes: datetime64[ns](2), float64(3), int64(1), object(13)
+
+# salvar os arquivos tratados em csv
+# nome_do_arquivo = r"C:\dev\roubos_celular_sp\dataset\dados.csv"
+# df_final.to_csv(nome_do_arquivo, index=False)
