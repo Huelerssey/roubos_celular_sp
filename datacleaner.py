@@ -129,7 +129,7 @@ for coluna in colunas:
     df_final[coluna] = df_final[coluna].fillna('').astype(bool)
 
 # Cria uma nova coluna contendo o País
-df_final['PAÍS'] = 'Brasil'
+df_final['PAÍS'] = 'BRASIL'
 
 # Cria uma coluna única com o endereço completo
 df_final['ENDERECO'] = df_final['LOGRADOURO'].astype(str) + ' - ' + df_final['NUMERO'].astype(str) + ' - ' + df_final['BAIRRO'].astype(str) + ' - ' + df_final['CIDADE'].astype(str) + ' - ' + df_final['UF'].astype(str) + ' - ' + df_final['PAÍS'].astype(str)
