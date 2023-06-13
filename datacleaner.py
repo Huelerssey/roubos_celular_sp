@@ -1,5 +1,7 @@
 import os
 import pandas as pd
+from dotenv import load_dotenv
+from sqlalchemy import create_engine
 
 # Caminho para a pasta contendo os arquivos Excel
 caminho_pasta = r"C:\dev\roubos_celular_sp\dataset"
@@ -130,7 +132,7 @@ for coluna in colunas:
 df_final['PAÍS'] = 'Brasil'
 
 # Cria uma coluna única com o endereço completo
-df_final['ENDEREÇO'] = df_final['LOGRADOURO'].astype(str) + ' - ' + df_final['NUMERO'].astype(str) + ' - ' + df_final['BAIRRO'].astype(str) + ' - ' + df_final['CIDADE'].astype(str) + ' - ' + df_final['UF'].astype(str) + ' - ' + df_final['PAÍS'].astype(str)
+df_final['ENDERECO'] = df_final['LOGRADOURO'].astype(str) + ' - ' + df_final['NUMERO'].astype(str) + ' - ' + df_final['BAIRRO'].astype(str) + ' - ' + df_final['CIDADE'].astype(str) + ' - ' + df_final['UF'].astype(str) + ' - ' + df_final['PAÍS'].astype(str)
 
 # deleta as colunas anteriores desnecessárias
 df_final = df_final.drop(['LOGRADOURO', 'NUMERO', 'BAIRRO', 'CIDADE', 'UF', 'PAÍS' ], axis=1)
@@ -152,6 +154,34 @@ df_final.loc[df_final['DELEGACIA_NOME'] != 'DELEGACIA_VIRTUAL', 'DELEGACIA_NOME'
 
 # Padroniza a coluna de marca_celular
 df_final['MARCA_CELULAR'] = df_final['MARCA_CELULAR'].str.title()
+
+# Carrega as variáveis de ambiente do arquivo .env
+load_dotenv()
+
+# Obtém os valores das variáveis de ambiente
+db_user = os.getenv("DB_USER")
+db_password = os.getenv("DB_PASSWORD")
+db_host = os.getenv("DB_HOST")
+db_port = os.getenv("DB_PORT")
+db_name = os.getenv("DB_NAME")
+
+# Constrói a string de conexão com o banco de dados
+db_connection_string = f"postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}"
+
+# Estabelece a conexão com o banco de dados
+engine = create_engine(db_connection_string)
+
+try:
+    # Insere os dados do DataFrame na tabela
+    df_final.to_sql(name='roubos', con=engine, if_exists='append', index=False)
+    print("Dados inseridos com sucesso!")
+
+except Exception as e:
+    print("Erro ao inserir os dados:", str(e))
+
+finally:
+    # Fecha a conexão com o banco de dados
+    engine.dispose()
 
 # print(df_final.info())
 # Index: 191850 entries, 0 to 241238
