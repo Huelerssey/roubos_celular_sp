@@ -3,19 +3,19 @@ import folium
 from folium.plugins import FastMarkerCluster, HeatMap
 
 # Função para criar um mapa de cluster
-def criar_mapa_cluster(dataframe):
+def criar_mapa_cluster(dataframe, zoom: int):
     media_latitude = dataframe['LATITUDE'].mean()
     media_longitude = dataframe['LONGITUDE'].mean()
-    fmap = folium.Map(location=[media_latitude, media_longitude], zoom_start=8, tiles='cartodbpositron')
+    fmap = folium.Map(location=[media_latitude, media_longitude], zoom_start=zoom, tiles='cartodbpositron')
     mapa_cluster = FastMarkerCluster(dataframe[['LATITUDE', 'LONGITUDE']])
     fmap.add_child(mapa_cluster)
     return fmap
 
 # Função para criar um mapa de heatmap
-def criar_mapa_heatmap(dataframe):
+def criar_mapa_heatmap(dataframe, zoom: int):
     media_latitude = dataframe['LATITUDE'].mean()
     media_longitude = dataframe['LONGITUDE'].mean()
-    fmap = folium.Map(location=[media_latitude, media_longitude], zoom_start=8, tiles='cartodbpositron')
+    fmap = folium.Map(location=[media_latitude, media_longitude], zoom_start=zoom, tiles='cartodbpositron')
     heat_map = HeatMap(dataframe[['LATITUDE', 'LONGITUDE']])
     fmap.add_child(heat_map)
     return fmap
@@ -33,12 +33,12 @@ gdf_geometria_estado_sp = gpd.read_file(r'C:\dev\roubos_celular_sp\geo\geometria
 gdf_roubos_estado_sp = gpd.read_file(r'C:\dev\roubos_celular_sp\geo\roubos_estado_de_sao_paulo.json', driver='GeoJSON')
 
 # Cria o mapa de cluster
-mapa_cluster1 = criar_mapa_cluster(gdf_roubos_capital)
-mapa_cluster2 = criar_mapa_cluster(gdf_roubos_estado_sp)
+mapa_cluster1 = criar_mapa_cluster(gdf_roubos_capital, 9)
+mapa_cluster2 = criar_mapa_cluster(gdf_roubos_estado_sp, 7)
 
 # Cria o mapa de heatmap
-mapa_heatmap1 = criar_mapa_heatmap(gdf_roubos_capital)
-mapa_heatmap2 = criar_mapa_heatmap(gdf_roubos_estado_sp)
+mapa_heatmap1 = criar_mapa_heatmap(gdf_roubos_capital, 9)
+mapa_heatmap2 = criar_mapa_heatmap(gdf_roubos_estado_sp, 7)
 
 # Adiciona a geometria da capital aos mapas
 folium.GeoJson(gdf_geometria_sp).add_to(mapa_cluster1)
@@ -51,4 +51,3 @@ mapa_cluster1.save(r'C:\dev\roubos_celular_sp\mapas_capital\mapa_cluster_capital
 mapa_heatmap1.save(r'C:\dev\roubos_celular_sp\mapas_capital\mapa_heatmap_capital.html')
 mapa_cluster2.save(r'C:\dev\roubos_celular_sp\mapas_estado\mapa_cluster_estado.html')
 mapa_heatmap2.save(r'C:\dev\roubos_celular_sp\mapas_estado\mapa_heatmap_estado.html')
-# implementar o zoom_start=7 para o mapa do estado e 9 para a capital.
