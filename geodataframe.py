@@ -38,12 +38,20 @@ tabela['GEOMETRY'] = tabela.apply(create_point, axis=1)
 #cria o  geo dataframe 
 tabela_gdf = gpd.GeoDataFrame(tabela, geometry='GEOMETRY')
 
+# Salva um arquivo geojson com os dados dos roubos do estado de sao paulo
+filename1 = r'C:\dev\roubos_celular_sp\geo\roubos_estado_de_sao_paulo.json'
+tabela_gdf.to_file(filename1, driver='GeoJSON')
+
 # Carrega os dados de geolocalização
 data = gpd.read_file(r'C:\dev\roubos_celular_sp\geo\SP_Municipios_2022.shp')
 
 # Plota um gráfico com todos os municipios de sp
 # data.plot(figsize=(10, 9), facecolor='white', edgecolor='black')
 # plt.show()
+
+# Salva um arquivo geojson com os dados da geometria do estado de sao paulo
+filename2 = r'C:\dev\roubos_celular_sp\geo\geometria_estado_de_sao_paulo.json'
+data.to_file(filename2, driver='GeoJSON')
 
 # filtra apenas a geometria da captal de sp
 gdf_sp = data[data['NM_MUN'] == 'São Paulo']
@@ -57,8 +65,8 @@ gdf_sp = data[data['NM_MUN'] == 'São Paulo']
 # gdf_sp.to_file(filename, driver='GeoJSON')
 
 # Carrega os dados geojson da geometria da captal de sao paulo
-filename = r'C:\dev\roubos_celular_sp\geo\capital_sao_paulo.json'
-gdf_capital_sp = gpd.read_file(filename, driver='GeoJSON')
+filename3 = r'C:\dev\roubos_celular_sp\geo\capital_sao_paulo.json'
+gdf_capital_sp = gpd.read_file(filename3, driver='GeoJSON')
 
 # Plota um gráfico exibindo os arquivos GeoJSON
 # gdf_capital_sp.plot()
@@ -86,5 +94,5 @@ gdf_roubos_capital = tabela_gdf[tabela_gdf.intersects(polygon_sp)]
 # plt.show()
 
 # Salva um arquivo geojson com os dados dentro da interseção de roubos na captal de são paulo
-filename1 = r'C:\dev\roubos_celular_sp\geo\roubos_celular_capital.json'
-gdf_roubos_capital.to_file(filename1, driver='GeoJSON')
+filename4 = r'C:\dev\roubos_celular_sp\geo\roubos_celular_capital.json'
+gdf_roubos_capital.to_file(filename4, driver='GeoJSON')
