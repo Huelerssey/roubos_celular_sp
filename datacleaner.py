@@ -155,6 +155,9 @@ df_final.loc[df_final['DELEGACIA_NOME'] != 'DELEGACIA_VIRTUAL', 'DELEGACIA_NOME'
 # Padroniza a coluna de marca_celular
 df_final['MARCA_CELULAR'] = df_final['MARCA_CELULAR'].str.title()
 
+# Substitui os valores na coluna DESCRICAOLOCAL
+df_final['DESCRICAOLOCAL'] = df_final['DESCRICAOLOCAL'].replace('Via pública', 'Via Pública')
+
 # Carrega as variáveis de ambiente do arquivo .env
 load_dotenv()
 
