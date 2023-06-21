@@ -158,6 +158,32 @@ df_final['MARCA_CELULAR'] = df_final['MARCA_CELULAR'].str.title()
 # Substitui os valores na coluna DESCRICAOLOCAL
 df_final['DESCRICAOLOCAL'] = df_final['DESCRICAOLOCAL'].replace('Via pública', 'Via Pública')
 
+# Agrupa todos os valores menores que 6 mil
+colunas_agrupar = []
+for marca, quantidade in df_final['MARCA_CELULAR'].value_counts().items():
+    if quantidade < 6000:
+        colunas_agrupar.append(marca)
+
+# agrupa todos os valores menores que 6mil em "Outros"
+for marca in colunas_agrupar:
+    df_final.loc[df_final['MARCA_CELULAR'] == marca, 'MARCA_CELULAR'] = 'Outros'
+
+# função para definir uma parte do dia para cada faiza de horário
+def obter_parte_do_dia(data_hora):
+    hora = pd.to_datetime(data_hora).hour
+
+    if 6 <= hora <= 11:
+        return 'Manhã'
+    elif 12 <= hora <= 17:
+        return 'Tarde'
+    elif 18 <= hora <= 23:
+        return 'Noite'
+    else:
+        return 'Madrugada'
+
+# cria uma nova coluna com as faixas de horarios definidas
+df_final['PARTE_DO_DIA'] = df_final['DATA_HORA_OCORRENCIA'].apply(obter_parte_do_dia)
+
 # Carrega as variáveis de ambiente do arquivo .env
 load_dotenv()
 
