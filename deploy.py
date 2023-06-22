@@ -114,10 +114,10 @@ if opcao_selecionada == 'Maps':
 
     # Opções do selectbox
     opcoes_graficos = [
-        'Mapa Clusterizado - Estado de São Paulo',
-        'Mapa de Calor - Estado de São Paulo',
-        'Mapa Clusterizado - Capital de São Paulo',
-        'Mapa de Calor - Capital de São Paulo'    
+        'Mapa Clusterizado - Estado de São Paulo 2022',
+        'Mapa de Calor - Estado de São Paulo 2022',
+        'Mapa Clusterizado - Capital de São Paulo 2022',
+        'Mapa de Calor - Capital de São Paulo 2022'    
         
     ]
 
@@ -136,10 +136,10 @@ if opcao_selecionada == 'Maps':
 
     # Mapeia a opção selecionada para o caminho do arquivo correspondente
     mapeamento_graficos = {
-        'Mapa Clusterizado - Estado de São Paulo': r'C:\dev\roubos_celular_sp\mapas_estado\mapa_cluster_estado.html',
-        'Mapa de Calor - Estado de São Paulo': r'C:\dev\roubos_celular_sp\mapas_estado\mapa_heatmap_estado.html',
-        'Mapa Clusterizado - Capital de São Paulo': r'C:\dev\roubos_celular_sp\mapas_capital\mapa_cluster_capital.html',
-        'Mapa de Calor - Capital de São Paulo': r'C:\dev\roubos_celular_sp\mapas_capital\mapa_heatmap_capital.html'
+        'Mapa Clusterizado - Estado de São Paulo 2022': r'C:\dev\roubos_celular_sp\mapas_estado\mapa_cluster_estado.html',
+        'Mapa de Calor - Estado de São Paulo 2022': r'C:\dev\roubos_celular_sp\mapas_estado\mapa_heatmap_estado.html',
+        'Mapa Clusterizado - Capital de São Paulo 2022': r'C:\dev\roubos_celular_sp\mapas_capital\mapa_cluster_capital.html',
+        'Mapa de Calor - Capital de São Paulo 2022': r'C:\dev\roubos_celular_sp\mapas_capital\mapa_heatmap_capital.html'
         
     }
 
