@@ -149,3 +149,19 @@ if opcao_selecionada == 'Maps':
         exibir_grafico(caminho_arquivo)
     else:
         st.warning('Selecione uma opção válida.')
+
+# Pagina do dashboard power bi
+if opcao_selecionada == 'Dashboard':
+
+    # Definir altura e largura do iframe
+    height = 800
+    width = 1300
+
+    # Centralizar o iframe
+    html_code = f"""
+    <div style="display: flex; justify-content: center;">
+        <iframe src="https://app.powerbi.com/view?r=eyJrIjoiODZhNWEwNmItYWY4My00OTQ5LThmMmEtMDM2YmNiOTcwNTk5IiwidCI6ImE5M2YyOTk3LTRjNGMtNDk2ZS05OTk5LTZkNTEzY2Y1ODFjZiJ9" 
+                height={height} width={width}></iframe>
+    </div>
+    """
+    st.markdown(html_code, unsafe_allow_html=True)
