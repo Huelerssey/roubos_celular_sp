@@ -453,5 +453,18 @@ if opcao_selecionada == 'Storytelling':
         # Criar um DataFrame pandas com os resultados
         df_resultados = pd.DataFrame(resultados)
 
-        # Exibir a tabela usando st.table()
+        # Exibir a tabela
         st.table(df_resultados.set_index('Métrica'))
+        st.write("Aqui temos o total de flagrantes efetuados pela polícia sobre todos os roubos. Aproximadamente 13 mil flagrantes para um total de 190 mil crimes. Ou seja, a força tarefa só conseguiu impedir 7% dos crimes desta natureza em 2022.")
+        st.image("imagens/4.png")
+        st.write("De acordo com os dados, desde a hora da ocorrencia até o inicio do registro na delegacia, leva-se em média 1h e 15 minutos. Esta é a atual distribuição de registros de BO entre delegacia Virtual ou Física.")
+        st.image("imagens/5.png")
+        st.write("De acordo com as informações fornecidas pelas vítimas nos BO'S, apenas 22% delas conseguiram dar uma descrição precisa do veículo utilizado pelo assaltante. Essa descrição conta com a cor, modelo e placa do veículo.")
+        st.image("imagens/6.png")
+        st.write("Adoraria poder fazer algumas análises adicionais como por exemplo, quantos destes crimes tiveram como resultado uma vítima fatal, mas quando isso acontece a ocorrencia é tabulada como omicídio e não como roubo.")
+        st.write("Esse tipo de divergencia é relativamente comum, aqui vai um outro ótimo exemplo: Estes são os registros dos locais dos roubos que você já acompanhou no dashboard só que antes de serem tratados. Perceba que a maioria dos dados estão registrados como 'Via Pública', e isso não é exatamente um erro, afinal um comercio pode estar localizado em uma via pública, uma rodovia/estrada não deixa de ser uma via pública, e assim por diante.")
+        st.image("imagens/7.png")
+        st.write("Com todas as informações relevantes reunidas aqui e no dashboard, podemos finalmente partir para as nossas conclusões!")
+        st.write("")
+
+        st.header("5. Resultados e considerações finais")
