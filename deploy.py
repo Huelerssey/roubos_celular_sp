@@ -1,3 +1,4 @@
+import pandas as pd
 import json
 import streamlit as st
 from streamlit_option_menu import option_menu
@@ -74,7 +75,7 @@ if opcao_selecionada == 'Home':
         st.write("")
         st.write("")
         st.write("")
-        st.subheader("Este é um projeto de análise de dados que utiliza a geolocalização de celulares registrados em boletins de ocorrência para determinar a localização exata de roubos em um mapa, fornecendo insights valiosos para auxiliar na tomada de decisões estratégicas.")
+        st.subheader("Este é um projeto de análise de dados que utiliza a geolocalização de celulares registrados em boletins de ocorrência para determinar a localização exata do crime, fornecendo insights valiosos para auxiliar na tomada de decisões estratégicas.")
     with col3:
         st.write("")
         st.write("")
@@ -182,8 +183,8 @@ if opcao_selecionada == 'Storytelling':
 
         # Introdução
         st.header("1. Introdução")
-        st.write("Bem-vindo ao storytelling do projeto de análise de dados de roubos de celular no estado de São Paulo. Aqui, embarcaremos em uma jornada de exploração dos dados e apresentação de insights interessantes sobre essa problemática.")
-        st.write("O objetivo deste projeto é obter uma compreensão abrangente desse cenário e identificar padrões significativos. Através deste storytelling, vou compartilhar descobertas valiosas que poderão contribuir para a compreensão do problema, apoio em tomadas de decisão e busca por soluções efetivas.")
+        st.write("Bem-vindo ao storytelling do projeto de análise de dados de roubos de celular no estado de São Paulo. Aqui, vou compartilhar todas as etapas de construção do projeto, transmitir descobertas valiosas de maneira simples e buscar por soluções efetivas.")
+        st.image("imagens/2.png")
         st.write("")
 
         st.header("2. Obtenção de dados")
@@ -193,7 +194,7 @@ if opcao_selecionada == 'Storytelling':
         st.write("")
 
         st.header("3. Data Cleaning & Loading")
-        st.write("Ainda que, em uma apresentação formal esse tópico possa não ser relevante, as etapas de limpeza, tratamento e carregamento tem um papel fundamental. Como este é um projeto de portfólio, vou compartilhar algumas das etapas de ETL, para demonstrar minhas habilidades no assunto. Caso queira explorar o código completo do projeto, ele está disponível no meu GitHub: [link](https://github.com/Huelerssey/roubos_celular_sp). No entanto, se isso não for do seu interesse, sinta-se à vontade para pular para a próxima seção.")
+        st.write("Ainda que, em uma apresentação formal esse tópico possa não ser relevante, as etapas de limpeza, tratamento e carregamento tem um papel fundamental. Como este é um projeto de portfólio, vou compartilhar algumas das etapas de ETL, para demonstrar minhas habilidades no assunto. No entanto, se isso não for do seu interesse, sinta-se à vontade para pular para a próxima seção. Caso queira explorar o código completo do projeto, ele está disponível no meu GitHub: [link](https://github.com/Huelerssey/roubos_celular_sp).")
         st.write("")
 
         st.subheader("Limpeza e tratamento de dados")
@@ -434,7 +435,23 @@ if opcao_selecionada == 'Storytelling':
 
         st.subheader("Visualização no banco de dados")
         st.image("imagens/1.jpeg")
+        st.write("Através dessa base de dados, serão construídos os mapas da mancha criminal usando Geopandas em Python e um Dashboard no Power BI.")
         st.write("")
-
-        st.header("4. Análise exploratória de dados")
         
+        st.header("4. Análise exploratória de dados")
+        st.write("Nesta etapa, vamos mergulhar nas profundezas do conjunto de dados, em busca de estatísticas gerais, detalhes específicos e insights relevantes.")
+        st.write("Por que não começar pela mancha criminal? Afinal, ela foi construída para isso!")
+        st.image("imagens/3.png")
+        st.write("É visível que quanto mais próximo da capital, maior a incidência de roubos. Isso se dá, principalmente, pela densidade populacional da Grande São Paulo, que é a maior de todas as capitais do Brasil, de acordo com o senso do IBGE em 2022.")
+        st.write("Ao total, em 2022, foram registrados aproximadamente 190 mil roubos de celular. Para ajudar a visualizar esse preocupante cenário, aqui vai uma tabela com as médias aproximadas.")
+        # Criar um dicionário com os resultados
+        resultados = {
+            'Métrica': ['Roubos por hora', 'Roubos por dia', 'Roubos por semana', 'Roubos por mês'],
+            '': [21, 521, 3654, 15833]
+        }
+
+        # Criar um DataFrame pandas com os resultados
+        df_resultados = pd.DataFrame(resultados)
+
+        # Exibir a tabela usando st.table()
+        st.table(df_resultados.set_index('Métrica'))
