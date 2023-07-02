@@ -443,7 +443,7 @@ if opcao_selecionada == 'Storytelling':
         st.write("Por que não começar pela mancha criminal? Afinal, ela foi construída para isso!")
         st.image("imagens/3.png")
         st.write("É visível que quanto mais próximo da capital, maior a incidência de roubos. Isso se dá, principalmente, pela densidade populacional da Grande São Paulo, que é a maior de todas as capitais do Brasil, de acordo com o senso do IBGE em 2022.")
-        st.write("Ao total, em 2022, foram registrados aproximadamente 190 mil roubos de celular. Para ajudar a visualizar esse preocupante cenário, aqui vai uma tabela com as médias aproximadas.")
+        st.write("Ao total, em 2022, foram registrados aproximadamente 190 mil roubos de celular. Para ajudar a visualizar esse preocupante cenário, aqui vai uma tabela com as médias aproximadas:")
         # Criar um dicionário com os resultados
         resultados = {
             'Métrica': ['Roubos por hora', 'Roubos por dia', 'Roubos por semana', 'Roubos por mês'],
@@ -455,16 +455,19 @@ if opcao_selecionada == 'Storytelling':
 
         # Exibir a tabela
         st.table(df_resultados.set_index('Métrica'))
-        st.write("Aqui temos o total de flagrantes efetuados pela polícia sobre todos os roubos. Aproximadamente 13 mil flagrantes para um total de 190 mil crimes. Ou seja, a força tarefa só conseguiu impedir 7% dos crimes desta natureza em 2022.")
+        st.write("Aqui temos o total de flagrantes efetuados pela polícia em relação a todos os roubos. Aproximadamente 13 mil flagrantes para um total de 190 mil crimes. Ou seja, a força-tarefa só conseguiu impedir 7% dos crimes dessa natureza em 2022.")
         st.image("imagens/4.png")
-        st.write("De acordo com os dados, desde a hora da ocorrencia até o inicio do registro na delegacia, leva-se em média 1h e 15 minutos. Esta é a atual distribuição de registros de BO entre delegacia Virtual ou Física.")
+        st.write("De acordo com os dados, desde a ocorrência até o início do registro na delegacia, leva-se em média 1 hora e 15 minutos. Essa é a atual distribuição dos registros de BO entre a delegacia virtual e a física. O formato online destaca a importância de agilizar o processo de registro para garantir uma resposta mais rápida e eficiente.")
         st.image("imagens/5.png")
-        st.write("De acordo com as informações fornecidas pelas vítimas nos BO'S, apenas 22% delas conseguiram dar uma descrição precisa do veículo utilizado pelo assaltante. Essa descrição conta com a cor, modelo e placa do veículo.")
+        st.write("De acordo com as informações fornecidas pelas vítimas nos BOs, apenas 22% delas conseguiram dar uma descrição precisa do veículo utilizado pelo assaltante. Essa descrição inclui a cor, o modelo e a placa do veículo, o que ressalta a dificuldade na identificação dos criminosos. Essa falta de informações detalhadas impacta diretamente nas investigações.")
         st.image("imagens/6.png")
-        st.write("Adoraria poder fazer algumas análises adicionais como por exemplo, quantos destes crimes tiveram como resultado uma vítima fatal, mas quando isso acontece a ocorrencia é tabulada como omicídio e não como roubo.")
-        st.write("Esse tipo de divergencia é relativamente comum, aqui vai um outro ótimo exemplo: Estes são os registros dos locais dos roubos que você já acompanhou no dashboard só que antes de serem tratados. Perceba que a maioria dos dados estão registrados como 'Via Pública', e isso não é exatamente um erro, afinal um comercio pode estar localizado em uma via pública, uma rodovia/estrada não deixa de ser uma via pública, e assim por diante.")
+        st.write("Adoraria poder fazer algumas análises adicionais, como por exemplo, quantos desses crimes resultaram em vítimas fatais. No entanto, quando isso acontece, a ocorrência é tabulada como homicídio e não como roubo. Essa distinção influencia a compreensão completa da dimensão dos roubos de celular e suas consequências.")
+        st.write("Esse tipo de divergência é relativamente comum. Aqui vai outro ótimo exemplo: esses são os registros dos locais dos roubos que você já acompanhou no dashboard, só que antes de serem tratados. Perceba que a maioria dos dados está registrada como 'Via Pública', e isso não é exatamente um erro, afinal, um comércio pode estar localizado em uma via pública, uma rodovia/estrada não deixa de ser uma via pública, e assim por diante.")
         st.image("imagens/7.png")
-        st.write("Com todas as informações relevantes reunidas aqui e no dashboard, podemos finalmente partir para as nossas conclusões!")
+        st.write("Então, com todas as informações relevantes reunidas nesta análise, na mancha criminal e no dashboard, podemos finalmente chegar às nossas conclusões!")
         st.write("")
 
         st.header("5. Resultados e considerações finais")
+        st.write("Com base nas informações fornecidas pela Folha de São Paulo, no ano de 2022, a polícia contava com um contingente de 107,7 mil policiais, levando em consideração que nem todos atuam diretamente nas ruas no combate ao crime devido à existência de diferentes setores, como administrativo, financeiro, entre outros. No entanto, para efeitos de análise, vamos considerar que todos estão realizando patrulhamento nas ruas. Nesse cenário, teríamos quase dois crimes para cada policial lidar. Percebe o quão delicada é a situação? Mesmo ao forçarmos uma suposição hipotética positiva, ela ainda está longe de ser uma solução ideal.")
+        st.write("Apesar dos desafios enfrentados, este projeto permitiu uma análise aprofundada dos dados, fornecendo insights valiosos para compreender a situação dos roubos de celular no estado de São Paulo em 2022. Foi possível identificar os locais mais propícios a receberem novos postos policiais, determinar os horários em que as patrulhas deveriam ser reforçadas e identificar os meses em que o contingente de policiais atuando nas ruas deveria aumentar ou diminuir. Essas informações são fundamentais para embasar ações preventivas, estratégias de segurança e políticas públicas voltadas para a redução desses crimes e a proteção da população.")
+        
