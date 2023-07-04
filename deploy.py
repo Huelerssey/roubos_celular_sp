@@ -137,10 +137,10 @@ if opcao_selecionada == 'Maps':
 
     # Mapeia a opção selecionada para o caminho do arquivo correspondente
     mapeamento_graficos = {
-        'Mancha Criminal Cluster - Estado de São Paulo 2022': r'C:\dev\roubos_celular_sp\mapas_estado\mapa_cluster_estado.html',
-        'Mancha Criminal Heat - Estado de São Paulo 2022': r'C:\dev\roubos_celular_sp\mapas_estado\mapa_heatmap_estado.html',
-        'Mancha Criminal Cluster - Capital de São Paulo 2022': r'C:\dev\roubos_celular_sp\mapas_capital\mapa_cluster_capital.html',
-        'Mancha Criminal Heat - Capital de São Paulo 2022': r'C:\dev\roubos_celular_sp\mapas_capital\mapa_heatmap_capital.html'
+        'Mancha Criminal Cluster - Estado de São Paulo 2022': 'mapas_estado\mapa_cluster_estado.html',
+        'Mancha Criminal Heat - Estado de São Paulo 2022': 'mapas_estado\mapa_heatmap_estado.html',
+        'Mancha Criminal Cluster - Capital de São Paulo 2022': 'mapas_capital\mapa_cluster_capital.html',
+        'Mancha Criminal Heat - Capital de São Paulo 2022': 'mapas_capital\mapa_heatmap_capital.html'
         
     }
 
