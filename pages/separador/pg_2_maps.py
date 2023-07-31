@@ -24,7 +24,7 @@ def maps():
             conteudo_html = arquivo.read()
 
         # Exibe o gráfico no Streamlit usando o Markdown
-        st.components.v1.html(conteudo_html, width=1460, height=800, scrolling=True)
+        st.components.v1.html(conteudo_html, width=1400, height=800, scrolling=True)
 
     # Mapeia a opção selecionada para o caminho do arquivo correspondente
     mapeamento_graficos = {
