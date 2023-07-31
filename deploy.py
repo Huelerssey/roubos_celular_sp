@@ -33,7 +33,7 @@ with st.sidebar:
     st_lottie(animacao_1, height=100, width=270)
     st.write("---")
     opcao_selecionada = option_menu(
-        menu_title="Menu Principal",
+        menu_title="Menu Inicial",
         menu_icon="justify",
         options=['Home', 'Maps', 'Dashboard', 'Storytelling'],
         icons=['house-door', 'geo-alt', 'clipboard-data', 'journals'],
