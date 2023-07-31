@@ -12,6 +12,8 @@ def home():
     # hello
     with open('animacoes/hello.json') as source:
         hello=json.load(source)
+    
+    # programing
     with open('animacoes/programing.json') as source:
         programing=json.load(source)
     

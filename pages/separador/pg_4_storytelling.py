@@ -10,21 +10,22 @@ def storytelling():
     with coluna2:
 
         # Introdução
-        st.title('Storytelling do Projeto')
+        st.markdown("<h1 style='text-align: center;'>📌 Storytelling do Projeto</h1>", unsafe_allow_html=True)
+        st.write("")
 
         # Introdução
-        st.header("1. Introdução")
+        st.header("📌 Introdução")
         st.write("Bem-vindo ao storytelling do projeto de análise de dados de roubos de celular no estado de São Paulo. Aqui, vou compartilhar todas as etapas de construção do projeto, transmitir descobertas valiosas de maneira simples e buscar por soluções efetivas.")
         st.image("imagens/2.png")
         st.write("")
 
-        st.header("2. Obtenção de dados")
+        st.header("📌 Obtenção de dados")
         st.write("Os dados sobre os crimes foram obtidos por meio do site do governo de São Paulo. Utilizei a plataforma de transparência da Secretaria de Segurança Pública de São Paulo, acessível através do [link](http://www.ssp.sp.gov.br/transparenciassp/Consulta.aspx). Essa fonte confiável fornece informações detalhadas sobre os registros de ocorrências de crimes, incluindo os casos de roubo de celular.")
         st.write("Além disso, para enriquecer a análise e desenvolver a funcionalidade da 'Mancha Criminal', fiz o uso de dados geográficos de todos os municípios de São Paulo. Esses dados foram adquiridos no site do Instituto Brasileiro de Geografia e Estatística (IBGE) por meio do seguinte [link](https://www.ibge.gov.br/geociencias/organizacao-do-territorio/malhas-territoriais/15774-malhas.html?=&t=downloads).")
         st.write("Em ambos os casos, não foi possível acessar os dados por meio de uma API, então realizei o download manual dos arquivos disponibilizados pelas respectivas plataformas.")
         st.write("")
 
-        st.header("3. Data Cleaning & Loading")
+        st.header("📌 Data Cleaning & Loading")
         st.write("Ainda que, em uma apresentação formal esse tópico possa não ser relevante, as etapas de limpeza, tratamento e carregamento tem um papel fundamental. Como este é um projeto de portfólio, vou compartilhar algumas das etapas de ETL, para demonstrar minhas habilidades no assunto. No entanto, se isso não for do seu interesse, sinta-se à vontade para pular para a próxima seção. Caso queira explorar o código completo do projeto, ele está disponível no meu GitHub: [link](https://github.com/Huelerssey/roubos_celular_sp).")
         st.write("")
 
@@ -269,7 +270,7 @@ def storytelling():
         st.write("Através dessa base de dados, serão construídos os mapas da mancha criminal usando Geopandas em Python e um Dashboard no Power BI.")
         st.write("")
         
-        st.header("4. Análise exploratória de dados")
+        st.header("📌 Análise exploratória de dados")
         st.write("Nesta etapa, vamos mergulhar nas profundezas do conjunto de dados, em busca de estatísticas gerais, detalhes específicos e insights relevantes.")
         st.write("Por que não começar pela mancha criminal? Afinal, ela foi construída para isso!")
         st.image("imagens/3.png")
@@ -298,7 +299,7 @@ def storytelling():
         st.write("Então, com todas as informações relevantes reunidas nesta análise, na mancha criminal e no dashboard, podemos finalmente chegar às nossas conclusões!")
         st.write("")
 
-        st.header("5. Resultados e considerações finais")
+        st.header("📌 Resultados e considerações finais")
         st.write("Com base nas informações fornecidas pela Folha de São Paulo, no ano de 2022, a polícia contava com um contingente de 107,7 mil policiais, levando em consideração que nem todos atuam diretamente nas ruas no combate ao crime devido à existência de diferentes setores, como administrativo, financeiro, entre outros. No entanto, para efeitos de análise, vamos considerar que todos estão realizando patrulhamento nas ruas. Nesse cenário, teríamos quase dois crimes para cada policial lidar. Percebe o quão delicada é a situação? Mesmo ao forçarmos uma suposição hipotética positiva, ela ainda está longe de ser uma solução ideal.")
         st.write("Apesar dos desafios enfrentados, este projeto permitiu uma análise aprofundada dos dados, fornecendo insights valiosos para compreender a situação dos roubos de celular no estado de São Paulo em 2022. Foi possível identificar os locais mais propícios a receberem novos postos policiais, determinar os horários em que as patrulhas deveriam ser reforçadas e identificar os meses em que o contingente de policiais atuando nas ruas deveria aumentar ou diminuir. Essas informações são fundamentais para embasar ações preventivas, estratégias de segurança e políticas públicas voltadas para a redução desses crimes e a proteção da população.")
         st.image("imagens/ultima.png")
