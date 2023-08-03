@@ -83,8 +83,4 @@ def home():
         st.write("")
         st.write("")
         st.write("")
-        st.write("")
-        st.write("")
-        st.write("")
-        st.write("")
         st_lottie(programing, height=400, width=300)
