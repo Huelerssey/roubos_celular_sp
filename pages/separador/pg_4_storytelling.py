@@ -303,3 +303,9 @@ def storytelling():
         st.write("Com base nas informações fornecidas pela Folha de São Paulo, no ano de 2022, a polícia contava com um contingente de 107,7 mil policiais, levando em consideração que nem todos atuam diretamente nas ruas no combate ao crime devido à existência de diferentes setores, como administrativo, financeiro, entre outros. No entanto, para efeitos de análise, vamos considerar que todos estão realizando patrulhamento nas ruas. Nesse cenário, teríamos quase dois crimes para cada policial lidar. Percebe o quão delicada é a situação? Mesmo ao forçarmos uma suposição hipotética positiva, ela ainda está longe de ser uma solução ideal.")
         st.write("Apesar dos desafios enfrentados, este projeto permitiu uma análise aprofundada dos dados, fornecendo insights valiosos para compreender a situação dos roubos de celular no estado de São Paulo em 2022. Foi possível identificar os locais mais propícios a receberem novos postos policiais, determinar os horários em que as patrulhas deveriam ser reforçadas e identificar os meses em que o contingente de policiais atuando nas ruas deveria aumentar ou diminuir. Essas informações são fundamentais para embasar ações preventivas, estratégias de segurança e políticas públicas voltadas para a redução desses crimes e a proteção da população.")
         st.image("imagens/ultima.png")
+   
+    #footer
+    with st.container():
+        col1, col2, col3 = st.columns(3)
+        
+        col2.write("Developed By: [@Huelerssey](https://github.com/Huelerssey)")
