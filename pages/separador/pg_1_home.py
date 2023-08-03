@@ -33,9 +33,9 @@ def home():
         st.write("")
         st.write("")
         st.write("")
-        st.subheader("Boas vindas ao projeto Mancha Criminal de SP")
+        st.markdown("<h5 style='text-align: justfy;'> Boas vindas ao projeto Mancha Criminal de SP </h5>", unsafe_allow_html=True)
     with col1:
-        st_lottie(hello, height=400, width=700)
+        st_lottie(hello, height=400, width=300)
     
     # resumo do projeto
     with col2:
@@ -56,7 +56,7 @@ def home():
         st.write("")
         st.write("")
         st.write("")
-        st.subheader("Este é um projeto de análise de dados que utiliza a geolocalização de celulares registrados em boletins de ocorrência para determinar a localização exata do crime, fornecendo insights valiosos para auxiliar na tomada de decisões estratégicas.")
+        st.markdown("<h5 style='text-align: justfy;'> Este é um projeto de análise de dados que utiliza a geolocalização de celulares registrados em boletins de ocorrência para determinar a localização exata do crime, fornecendo insights valiosos para auxiliar na tomada de decisões estratégicas.</h5>", unsafe_allow_html=True)
     with col3:
         st.write("")
         st.write("")
@@ -87,8 +87,4 @@ def home():
         st.write("")
         st.write("")
         st.write("")
-        st.write("")
-        st.write("")
-        st.write("")
-        st.write("")
-        st_lottie(programing, height=400, width=400)
+        st_lottie(programing, height=400, width=300)
