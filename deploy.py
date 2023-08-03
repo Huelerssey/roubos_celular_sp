@@ -15,12 +15,6 @@ st.set_page_config(
     layout='wide'
 )
 
-# função que otimiza o carregamento dos dados
-@st.cache_data
-def carregar_dados():
-    tabela = pd.read_csv("dataset/dados.csv")
-    return tabela
-
 with open("style.css") as f:
     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
