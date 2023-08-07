@@ -1,17 +1,23 @@
 import streamlit as st
 import pandas as pd
+from streamlit_extras.colored_header import colored_header
 
 
 def storytelling():
-    # Organiza as colunas
-    coluna1, coluna2, coluna3 = st.columns(3)
+    # organiza as colunas do site
+    coluna1, coluna2 = st.columns([3, 1])
 
     # Coloca o texto no centro da pagina
-    with coluna2:
+    with coluna1:
 
         # Introdução
         st.markdown("<h1 style='text-align: center;'>📌 Storytelling do Projeto</h1>", unsafe_allow_html=True)
-        st.write("")
+        # marcador vermelho
+        colored_header(
+        label="",
+        description="",
+        color_name="red-70"
+    )
 
         # Introdução
         st.header("📌 Introdução")
